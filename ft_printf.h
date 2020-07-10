@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 14:17:07 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/07 19:41:01 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/10 18:42:08 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 
 typedef struct	s_print
 {
-	char preob;
-	char star;
+	unsigned int shir;
 	char dot;
+	char star;
 	unsigned int i;
 	unsigned int first;
-	char *type;
 	char *str;
 	unsigned char sym;
-	unsigned int smallnum;
-	int num;
-	int afterdot;
+	size_t afterdot;
 }				t_print;
 
-int	ft_atoi(const char *str);
+void	*width(const char *format, t_print *all);
+void	*workwithdot(const char *format, t_print *all, va_list *factor);
+char	*ft_strchr(const char *str, int ch);
+int		ft_atoi(const char *str);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 size_t	ft_strlen(const char *str);
