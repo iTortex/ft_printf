@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   width.c                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/12 16:12:16 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/12 16:12:16 by amarcele         ###   ########.fr       */
+/*   Created: 2020/05/08 18:58:02 by amarcele          #+#    #+#             */
+/*   Updated: 2020/07/12 16:38:14 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*width(const char *format, t_print *all, va_list *factor)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char *ptr;
-	ptr = (&((char *)format)[all->i]);
-	all->shir = ft_atoi(ptr);
-	while(format[all->i] >= '0' && format[all->i] <= '9')
-		all->i++;
-	if (format[all->i] == '*')
+	char *mem;
+	int i;
+
+	i = 0;
+	if (nmemb == 0 || size == 0)
 	{
-		all->star = '*';
-		all->i++;
-		all->shir = va_arg(*factor,size_t);
+		nmemb = 1;
+		size = 1;
 	}
-	return (0);
+	mem = malloc(size * nmemb);
+	if (mem == NULL)
+		return (NULL);
+	while (nmemb != 0)
+	{
+		mem[i] = '\0';
+		i++;
+		nmemb--;
+	}
+	return (mem);
 }
