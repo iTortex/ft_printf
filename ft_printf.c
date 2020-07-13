@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 18:09:19 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/12 19:54:16 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/13 20:04:35 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ int		ft_printf(const char *format, ...)
 				writeforid(&all, &factor);
 			if (format[all.i] == 'c')
 				writeforc(&all, &factor);
+			if (format[all.i] == 'x' || format[all.i] == 'X')
+				writeforxX(format, &all, &factor);
+			if (format[all.i] == 'u')
+				writeforu(&all, &factor);
 		}
 		if (format[all.i] != '%')
 		{
@@ -71,12 +75,14 @@ int		ft_printf(const char *format, ...)
 
 int main (void)
 {	
-	//char *str = "   Hello World!";
-	//printf("chislo ravno: %.*s%5.4d|\n", 4, "Hello world", 111);
-	//ft_printf("chislo ravno: %.*s%5.4d|\n", 4, "Hello world", 111);
-	printf("%-1c|", 'F');
-	ft_printf("%-1c|", 'F');
-	//printf("%s\n", str);
-	//ft_printf("%s", str);
+	// char *str = "   Hello World!";
+	// printf("%0.5d|\n", 111);
+	// ft_printf("%0.5d|", 111);
+	// printf("%-1c|", 'F');
+	// ft_printf("%-1c|", 'F');
+	printf("%15u|\n",-992);
+	ft_printf("%15u|",-992);
+	// printf("%s\n", str);
+	// ft_printf("%s", str);
 	return (0);
 }

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   writeforid.c                                       :+:      :+:    :+:   */
+/*   writeforu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/12 15:12:25 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/13 19:43:16 by amarcele         ###   ########.fr       */
+/*   Created: 2020/07/13 19:58:51 by amarcele          #+#    #+#             */
+/*   Updated: 2020/07/13 20:07:07 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*writeforid(t_print *all, va_list *factor)
+void	*writeforu(t_print *all, va_list *factor)
 {
-	all->str = ft_itoa(va_arg(*factor, int));
+	all->wrks = va_arg(*factor, unsigned int);
+	all->str = ft_itoa(all->wrks);
 	if (all->afterdot != 0)
 		all->checkad = all->afterdot;
 	if (all->minus != '-')

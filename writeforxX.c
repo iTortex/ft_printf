@@ -1,20 +1,92 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   writeforid.c                                       :+:      :+:    :+:   */
+/*   writeforxX.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/12 15:12:25 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/13 19:43:16 by amarcele         ###   ########.fr       */
+/*   Created: 2020/07/13 12:48:09 by amarcele          #+#    #+#             */
+/*   Updated: 2020/07/13 19:01:15 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*writeforid(t_print *all, va_list *factor)
+void	*zapoln(t_print *all, int ost)
 {
-	all->str = ft_itoa(va_arg(*factor, int));
+	int i;
+
+	i = 0;
+	all->str = ft_calloc(sizeof(char), ost + 1);
+	while (all->wrks != 0)
+	{
+		if (all->wrks % 16 > 9 && all->wrks % 16 < 16)
+		{
+			all->str[i] = all->wrks % 16 + all->six;
+			i++;
+		}
+		if (all->wrks % 16 < 10 && all->wrks % 16 >= 0)
+		{
+			all->str[i] = all->wrks % 16 + 48;
+			i++;
+		}
+		all->wrks /= 16;
+	}
+	return (0);
+}
+
+void	*rev(t_print *all)
+{
+	char *dup;
+	int i;
+	int j;
+	
+	i = 0;
+	j = ft_strlen(all->str);
+	dup = ft_calloc(sizeof(char), j + 1);
+	while (all->str[i])
+	{
+		dup[i] = all->str[i];
+		i++;
+	}
+	i = 0;
+	j--;
+	while (j >= 0)
+	{
+		all->str[i] = dup[j];
+		i++;
+		j--;
+	}
+	free(dup);
+	return (0);
+}
+
+void	*transfor(t_print *all, const char *format)
+{
+	int ost;
+	int j;
+	
+	j = all->wrks;
+	ost = 0;
+	if (format[all->i] == 'X')
+		all->six = 55;
+	else
+		all->six = 87;
+	while (all->wrks != 0)
+	{
+		all->wrks /= 16;
+		ost++;
+	}
+	all->wrks = j;
+	zapoln(all, ost);
+	rev(all);
+	return (0);
+}
+
+void	*writeforxX(const char *format, t_print *all, va_list *factor)
+{
+	all->wrks = va_arg(*factor, unsigned int);
+	transfor(all, format);
 	if (all->afterdot != 0)
 		all->checkad = all->afterdot;
 	if (all->minus != '-')
