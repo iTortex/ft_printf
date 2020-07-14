@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 16:20:04 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/12 16:17:01 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/14 13:23:24 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int			schet(int del, int ch)
+static int			schet(unsigned int del, int ch)
 {
 	while (del)
 	{
@@ -22,7 +22,7 @@ static int			schet(int del, int ch)
 	return (ch);
 }
 
-static char			*ravn(char *str1, int n, int nom)
+static char			*ravn(char *str1, unsigned int n, int nom)
 {
 	unsigned int	ch2;
 
@@ -40,11 +40,11 @@ static char			*ravn(char *str1, int n, int nom)
 	return (str1);
 }
 
-char				*ft_itoa(int num)
+char				*ft_utoa(unsigned int num)
 {
 	char			*str;
 	int				i;
-	int				ch;
+	unsigned int	ch;
 	unsigned int	pol;
 
 	i = 0;

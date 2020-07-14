@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 14:17:07 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/13 20:03:25 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/14 16:46:21 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 
 typedef struct	s_print
 {
-	
+	int exit;
 	unsigned int shir;
 	char dot;
 	char star;
 	char minus;
 	char zero;
+	long long int point;
 	unsigned int six;
 	unsigned int wrks;
 	unsigned int i;
@@ -35,6 +36,8 @@ typedef struct	s_print
 	unsigned int checkad;
 }				t_print;
 
+void	*writeforp(t_print *all, va_list *factor);
+char	*ft_utoa(unsigned int num);
 void	*writeforu(t_print *all, va_list *factor);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 void	*writeforxX(const char *format, t_print *all, va_list *factor);
