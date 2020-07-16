@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 18:09:19 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/14 18:53:07 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/16 20:35:28 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,23 @@
 
 void	*checkforflags(const char *format, t_print *all, va_list *factor)
 {
+	if (format[all->i] == '0')
+	{
+		all->zero = '0';
+		all->i++;
+	}
+	if (format[all->i] == '%')
+	{
+		write(1, "%%", 1);
+		all->i++;
+		all->exit++;
+	}
 	if (format[all->i] == '-')
 	{
 		all->minus = '-';
 		all->i++;
 	}
-	if ((format[all->i] >= '1' && format[all->i] <= '9') || format[all->i] == '*')
+	if ((format[all->i] >= '0' && format[all->i] <= '9') || format[all->i] == '*')
 		width(format, all, factor);
 	if (format[all->i] == '.')
 		workwithdot(format, all, factor);
@@ -55,6 +66,7 @@ int		ft_printf(const char *format, ...)
 	all.afterdot = 0;
 	all.exit = 0;
 	all.checkad = 0;
+	all.zero = ' ';
 	va_start(factor, format);
 	while (format[all.i] != '\0')
 	{
@@ -62,8 +74,8 @@ int		ft_printf(const char *format, ...)
 		{
 			all.i += 1;
 			iforif(format, &all, &factor);
-			all.shir = 0;
 			all.afterdot = 0;
+			all.dot = ' ';
 		}
 		if (all.i < ft_strlen(format) && format[all.i] != '%')
 		{
@@ -76,21 +88,21 @@ int		ft_printf(const char *format, ...)
 	return (all.exit);
 }
 
-int main (void)
-{	
-	char *str = "Hello World!";
-	// printf("%0.5d|\n", 111);
-	// ft_printf("%0.5d|", 111);
-	// printf("%-1c|", 'F');
-	// ft_printf("%-1c|", 'F');
-	//unsigned int c = 11;
-	//printf("%p|\n",&c);
-	//printf("%20.10u|\n", c);
-	//ft_printf("%20.10u|\n", c);
-	//ft_printf("%10p|\n", &c);
-	//printf("\n%i", f);
-	//ft_printf("%10.20u|",-9982);
-	// printf("%.0s\n", str);
-	ft_printf("%1s", str);
-	return (0);
-}
+// int main (void)
+// {	
+// 	// char *str = "Hello World!";
+// 	// printf("%0.5d|\n", 111);
+// 	// ft_printf("%0.5d|", 111);
+// 	// printf("%-1c|", 'F');
+// 	// ft_printf("%-1c|", 'F');
+// 	//unsigned int c = 11;
+// 	//printf("%p|\n",&c);
+// 	//printf("%20.10u|\n", c);
+// 	//ft_printf("%20.10u|\n", c);
+// 	//ft_printf("%10p|\n", &c);
+// 	//printf("\n%i", f);
+// 	// ft_printf("%llf|\n",42.5);
+// //	ft_printf("%.s\n", "hello");
+// 	ft_printf("%.s", "hello");
+// 	return (0);
+// }

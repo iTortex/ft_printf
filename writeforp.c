@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/14 13:51:57 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/14 17:31:15 by amarcele         ###   ########.fr       */
+/*   Created: 2020/07/16 16:17:49 by amarcele          #+#    #+#             */
+/*   Updated: 2020/07/16 16:17:53 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	*writeforp(t_print *all, va_list *factor)
 		all->exit = all->exit + 2 + ft_strlen(all->str);
 		all->i++;
 	}
-	while (all->shir - 2 > all->checkad && all->shir != 0)
+	while (all->shir - 2 - ft_strlen(all->str) > all->checkad && all->shir != 0)
 	{
 		all->shir--;
 		write(1, " ", 1);

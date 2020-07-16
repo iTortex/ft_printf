@@ -6,11 +6,36 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 12:48:09 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/13 19:01:15 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:02:20 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static void *minusnothere(t_print *all)
+{
+	if (!all->afterdot)
+		all->afterdot = ft_strlen(all->str);
+	if (all->afterdot < all->shir)
+	{
+		while (all->afterdot != all->shir)
+		{
+			all->shir--;
+			write(1, " ", 1);
+		}
+	}
+	if (all->afterdot > ft_strlen(all->str) && all->dot == '.')
+	{
+		while (all->afterdot != ft_strlen(all->str))
+			{
+				all->afterdot--;
+				write(1, "0", 1);
+			}
+	}
+	write(1, all->str, ft_strlen(all->str));
+	all->i++;
+	return (0);
+}
 
 void	*zapoln(t_print *all, int ost)
 {
@@ -90,28 +115,7 @@ void	*writeforxX(const char *format, t_print *all, va_list *factor)
 	if (all->afterdot != 0)
 		all->checkad = all->afterdot;
 	if (all->minus != '-')
-	{
-		if (!all->afterdot)
-			all->afterdot = ft_strlen(all->str);
-		if (all->afterdot < all->shir)
-		{
-			while (all->afterdot != all->shir)
-			{
-				all->shir--;
-				write(1, " ", 1);
-			}
-		}
-		if (all->afterdot > ft_strlen(all->str) && all->dot == '.')
-		{
-			while (all->afterdot != ft_strlen(all->str))
-				{
-					all->afterdot--;
-					write(1, "0", 1);
-				}
-		}
-		write(1, all->str, ft_strlen(all->str));
-		all->i++;
-	}
+		minusnothere(all);
 	if (all->minus == '-')
 	{
 		if (all->afterdot > ft_strlen(all->str) && all->dot == '.')
@@ -120,15 +124,18 @@ void	*writeforxX(const char *format, t_print *all, va_list *factor)
 				{
 					all->afterdot--;
 					write(1, "0", 1);
+					all->exit++;
 				}
 		}
 		write(1, all->str, ft_strlen(all->str));
 		all->i++;
+		all->exit +=  ft_strlen(all->str);
 	}
-	while (all->shir > all->checkad && all->shir != 0)
+	while (all->shir - ft_strlen(all->str) > all->checkad && all->shir != 0)
 	{
 		all->shir--;
 		write(1, " ", 1);
+		all->exit++;
 	}
 	free(all->str);
 	return (0);

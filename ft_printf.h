@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 14:17:07 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/14 16:46:21 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/16 20:53:24 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct	s_print
 	unsigned int checkad;
 }				t_print;
 
+int		ft_strncmp(const char *str1, const char *str2, size_t n);
 void	*writeforp(t_print *all, va_list *factor);
 char	*ft_utoa(unsigned int num);
 void	*writeforu(t_print *all, va_list *factor);
