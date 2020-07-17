@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 14:17:07 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/16 20:53:24 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:35:31 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 
 typedef struct	s_print
 {
+	int id;
+	int checkforminus;
 	int exit;
-	unsigned int shir;
+	int shir;
 	char dot;
 	char star;
 	char minus;
@@ -28,12 +30,12 @@ typedef struct	s_print
 	long long int point;
 	unsigned int six;
 	unsigned int wrks;
-	unsigned int i;
-	unsigned int first;
+	int i;
+	int first;
 	char *str;
 	char sym;
-	unsigned int afterdot;
-	unsigned int checkad;
+	int afterdot;
+	int checkad;
 }				t_print;
 
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
@@ -53,6 +55,6 @@ char	*ft_strchr(const char *str, int ch);
 int		ft_atoi(const char *str);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-size_t	ft_strlen(const char *str);
+int	ft_strlen(const char *str);
 
 #endif

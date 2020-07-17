@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 12:48:09 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/16 16:02:20 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/17 16:48:27 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	*writeforxX(const char *format, t_print *all, va_list *factor)
 		all->i++;
 		all->exit +=  ft_strlen(all->str);
 	}
-	while (all->shir - ft_strlen(all->str) > all->checkad && all->shir != 0)
+	while (all->shir - ft_strlen(all->str) != all->checkad && all->shir != 0)
 	{
 		all->shir--;
 		write(1, " ", 1);

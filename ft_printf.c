@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 18:09:19 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/16 20:35:28 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/17 19:31:07 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*checkforflags(const char *format, t_print *all, va_list *factor)
 {
-	if (format[all->i] == '0')
+	while (format[all->i] == '0')
 	{
 		all->zero = '0';
 		all->i++;
@@ -95,14 +95,15 @@ int		ft_printf(const char *format, ...)
 // 	// ft_printf("%0.5d|", 111);
 // 	// printf("%-1c|", 'F');
 // 	// ft_printf("%-1c|", 'F');
-// 	//unsigned int c = 11;
+// 	// unsigned int c = 11;
 // 	//printf("%p|\n",&c);
 // 	//printf("%20.10u|\n", c);
 // 	//ft_printf("%20.10u|\n", c);
 // 	//ft_printf("%10p|\n", &c);
 // 	//printf("\n%i", f);
 // 	// ft_printf("%llf|\n",42.5);
-// //	ft_printf("%.s\n", "hello");
-// 	ft_printf("%.s", "hello");
+// 	// ft_printf("%.s\n", "hello");
+// 	// ft_printf("\n%*.1s", 10, NULL);
+// 	//printf("\n%i", ft_printf("\n%*.p", 10, &c));
 // 	return (0);
 // }

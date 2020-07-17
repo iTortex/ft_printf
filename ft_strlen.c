@@ -6,13 +6,13 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/29 19:26:11 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/05 15:26:32 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/17 17:34:57 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
 	size_t i;
 
