@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 15:12:25 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/19 15:29:51 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 15:38:34 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	*writeforid(t_print *all, va_list *factor)
 		all->checkforminus = 1;
 		if (all->shir != 0)
 			all->shir--;
-		all->str = (ft_itoa(-1 * all->id));
+		all->id *= -1;
+		all->str = (ft_itoa(all->id));
 	}
 	else
 		all->str = ft_itoa(all->id);
@@ -115,7 +116,7 @@ void	*writeforid(t_print *all, va_list *factor)
 	all->shir - ft_strlen(all->str) && all->shir > 0)
 	{
 		all->shir--;
-		write(1, &all->zero, 1);
+		write(1, " ", 1);
 		all->exit++;
 	}
 	free(all->str);

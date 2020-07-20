@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/05 14:17:07 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/17 17:35:31 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 17:18:17 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct	s_print
 {
+	char prcnt;
 	int id;
 	int checkforminus;
 	int exit;
@@ -38,6 +39,9 @@ typedef struct	s_print
 	int checkad;
 }				t_print;
 
+void	*transforx(t_print *all, const char *format);
+void	*transforp(t_print *all);
+void	*writeforprcnt(t_print *all, const char *format);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 void	*writeforp(t_print *all, va_list *factor);
 char	*ft_utoa(unsigned int num);

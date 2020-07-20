@@ -6,15 +6,15 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 14:06:01 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/16 21:13:45 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 17:14:24 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*minushere(t_print *all)
+static void	*minushere(t_print *all)
 {
-	if (!all->afterdot)
+	if (!all->afterdot || all->afterdot < 0)
 		all->afterdot = ft_strlen(all->str);
 	if (all->afterdot > ft_strlen(all->str))
 		all->afterdot = ft_strlen(all->str);
@@ -33,18 +33,58 @@ void	*minushere(t_print *all)
 	return (0);
 }
 
+static void *minusnothere(t_print *all)
+{
+	if (!all->afterdot || all->afterdot < 0)
+		all->afterdot = ft_strlen(all->str);
+	if (all->afterdot > ft_strlen(all->str))
+		all->afterdot = ft_strlen(all->str);
+	if (all->afterdot < all->shir)
+	{
+		while (all->afterdot != all->shir)
+		{
+			all->shir--;
+			write(1, &all->zero, 1);
+			all->exit++;
+		}
+	}
+	write(1, all->str, all->afterdot);
+	all->exit += all->afterdot;
+	all->i++;
+	return (0);
+}
+
+static void	*ifnull(t_print *all)
+{
+	all->str = ft_calloc(sizeof(char), 8);
+	all->str = "(null)";
+	if (all->minus != '-')
+		minusnothere(all);
+	if (all->minus == '-')
+		minushere(all);
+	all->str = NULL;
+	free(all->str);
+	return(0);
+}
+
+static void	*somecase(t_print *all)
+{
+	while(all->shir--)
+	{
+		all->zero = ' ';
+		write(1, &all->zero, 1);
+		all->exit += 1;
+	}
+	all->i++;
+	return (0);
+}
+
 void	*writefors(t_print *all, va_list *factor)
 {
 	all->str = va_arg(*factor, char *);
 	if (all->dot == '.' && all->afterdot == 0 && all->shir != 0)
 	{
-		while(all->shir--)
-		{
-			all->zero = ' ';
-			write(1, &all->zero, 1);
-			all->exit += 1;
-		}
-		all->i++;
+		somecase(all);
 		return (0);
 	}
 	if (all->dot == '.' && all->afterdot == 0 && all->shir == 0)
@@ -54,28 +94,11 @@ void	*writefors(t_print *all, va_list *factor)
 	}
 	if (all->str == NULL)
 	{
-		all->str = ft_calloc(sizeof(char), 8); // тут лик, быдло
-		all->str = "(null)";
+		ifnull(all);
+		return (0);
 	}
 	if (all->minus != '-')
-	{
-		if (!all->afterdot)
-			all->afterdot = ft_strlen(all->str);
-		if (all->afterdot > ft_strlen(all->str))
-			all->afterdot = ft_strlen(all->str);
-		if (all->afterdot < all->shir)
-		{
-			while (all->afterdot != all->shir)
-			{
-				all->shir--;
-				write(1, &all->zero, 1);
-				all->exit++;
-			}
-		}
-		write(1, all->str, all->afterdot);
-		all->exit += all->afterdot;
-		all->i++;
-	}
+		minusnothere(all);
 	if (all->minus == '-')
 		minushere(all);
 	return (0);

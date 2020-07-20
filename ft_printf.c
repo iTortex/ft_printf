@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 18:09:19 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/19 20:20:59 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 15:32:52 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,7 @@ void	*checkforflags(const char *format, t_print *all, va_list *factor)
 		if (format[all->i] == '-')
 			all->zero = ' ';
 	}
-	if (format[all->i] == '%')
-	{
-		write(1, "%%", 1);
-		all->i++;
-		all->exit++;
-	}
-	if (format[all->i] == '-')
+	while (format[all->i] == '-')
 	{
 		all->minus = '-';
 		all->i++;
@@ -42,18 +36,32 @@ void	*checkforflags(const char *format, t_print *all, va_list *factor)
 void	*iforif(const char *format, t_print *all, va_list *factor)
 {
 	checkforflags(format, all, factor);
-	if (format[all->i] == 's')
+	if (format[all->i] == '%')
+		writeforprcnt(all, format);
+	if (format[all->i] == 's' && all->prcnt != '%')
 		writefors(all, factor);
-	if (format[all->i] == 'i' || format[all->i] == 'd')
+	if ((format[all->i] == 'i' || format[all->i] == 'd') && all->prcnt != '%')
 		writeforid(all, factor);
-	if (format[all->i] == 'c')
+	if (format[all->i] == 'c' && all->prcnt != '%')
 		writeforc(all, factor);
-	if (format[all->i] == 'x' || format[all->i] == 'X')
+	if ((format[all->i] == 'x' || format[all->i] == 'X') && all->prcnt != '%')
 		writeforxX(format, all, factor);
-	if (format[all->i] == 'u')
+	if (format[all->i] == 'u' && all->prcnt != '%')
 		writeforu(all, factor);
-	if (format[all->i] == 'p')
+	if (format[all->i] == 'p' && all->prcnt != '%')
 		writeforp(all, factor);
+	return (0);
+}
+
+static void	*obnul(t_print *all)
+{
+	all->i = 0;
+	all->first = 0;
+	all->afterdot = 0;
+	all->shir = 0;
+	all->exit = 0;
+	all->checkad = 0;
+	all->zero = ' ';
 	return (0);
 }
 
@@ -62,20 +70,13 @@ int		ft_printf(const char *format, ...)
 	t_print all;
 	va_list factor;
 	
-	all.i = 0;
-	all.first = 0;
-	all.afterdot = 0;
-	all.shir = 0;
-	all.exit = 0;
-	all.checkad = 0;
-	all.zero = ' ';
+	obnul(&all);
 	va_start(factor, format);
 	while (format[all.i] != '\0')
 	{
 		if (format[all.i] == '%')
 		{
 			all.afterdot = 0;
-			all.shir = 0;
 			all.dot = ' ';
 			all.str = NULL;
 			all.i += 1;
@@ -108,6 +109,6 @@ int		ft_printf(const char *format, ...)
 // 	// int mx_u = 235;
 // 	// int a05 = 15;
 // 	// printf("%u%x\n", mx_u, mx_u);
-// 	ft_printf("%8.3x", 8375);
+// 	ft_printf("%05%wwww");
 // 	return (0);
 // }

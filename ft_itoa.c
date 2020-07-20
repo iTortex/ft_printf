@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/11 16:20:04 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/12 16:17:01 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 14:16:47 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char				*ft_itoa(int num)
 
 	i = 0;
 	ch = num;
-	if (num <= 0)
+	if (num == 0)
 		i++;
 	i += schet(num, 0);
 	str = ft_calloc(i + 1, sizeof(char));
@@ -57,11 +57,11 @@ char				*ft_itoa(int num)
 		return (NULL);
 	str[i--] = '\0';
 	pol = ch;
-	if (ch < 0)
-	{
-		str[0] = '-';
-		pol = ch * -1;
-	}
+	// if (ch < 0)
+	// {
+	// 	str[0] = '-';
+	// 	pol = ch * -1;
+	// }
 	str = ravn(str, pol, i);
 	return (str);
 }
