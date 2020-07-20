@@ -6,43 +6,46 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:51 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/19 20:21:51 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:30:48 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void *minusnothere(t_print *all)
+static void		shmaf(t_print *all)
+{
+	while (all->shir - all->afterdot > 0)
+	{
+		if (all->shir >= all->afterdot && all->dot == '.')
+		{
+			write(1, " ", 1);
+			all->exit++;
+			all->shir--;
+		}
+		else if (all->shir >= all->afterdot && all->dot != '.')
+		{
+			write(1, &all->zero, 1);
+			all->exit++;
+			all->shir--;
+		}
+	}
+}
+
+static void		*minusnothere(t_print *all)
 {
 	if (!all->afterdot || all->afterdot < ft_strlen(all->str))
 		all->afterdot = ft_strlen(all->str);
 	if (all->afterdot < all->shir)
-	{
-		while (all->shir - all->afterdot > 0)
-		{
-			if (all->shir >= all->afterdot && all->dot == '.')
-			{
-					write(1, " ", 1);
-					all->exit++;
-					all->shir--;
-			}
-			else if (all->shir >= all->afterdot && all->dot != '.')
-			{
-				write(1, &all->zero, 1);
-				all->exit++;
-				all->shir--;
-			}
-		}
-	}
+		shmaf(all);
 	if (all->afterdot > ft_strlen(all->str) && all->dot == '.')
 	{
 		while (all->afterdot != ft_strlen(all->str))
-			{
-				all->shir--;
-				all->afterdot--;
-				write(1, "0", 1);
-				all->exit++;
-			}
+		{
+			all->shir--;
+			all->afterdot--;
+			write(1, "0", 1);
+			all->exit++;
+		}
 	}
 	write(1, all->str, ft_strlen(all->str));
 	all->exit += ft_strlen(all->str);
@@ -50,24 +53,21 @@ static void *minusnothere(t_print *all)
 	return (0);
 }
 
-static void	*minushere(t_print *all)
+static void		*minushere(t_print *all)
 {
-	if (all->minus == '-')
+	if (all->afterdot > ft_strlen(all->str) && all->dot == '.')
 	{
-		if (all->afterdot > ft_strlen(all->str) && all->dot == '.')
+		while (all->afterdot != ft_strlen(all->str))
 		{
-			while (all->afterdot != ft_strlen(all->str))
-				{
-					all->shir--;
-					all->afterdot--;
-					write(1, "0", 1);
-					all->exit++;
-				}
+			all->shir--;
+			all->afterdot--;
+			write(1, "0", 1);
+			all->exit++;
 		}
-		write(1, all->str, ft_strlen(all->str));
-		all->i++;
-		all->exit += ft_strlen(all->str);
 	}
+	write(1, all->str, ft_strlen(all->str));
+	all->i++;
+	all->exit += ft_strlen(all->str);
 	if (all->shir <= ft_strlen(all->str))
 		all->shir = 0;
 	while (all->shir - ft_strlen(all->str) > 0 &&
@@ -88,7 +88,7 @@ static	void	*whiles(t_print *all)
 		write(1, &all->zero, 1);
 		all->exit++;
 	}
-	while(all->shir > all->checkad && all->shir == 0)
+	while (all->shir > all->checkad && all->shir == 0)
 	{
 		all->shir--;
 		write(1, &all->zero, 1);
@@ -97,7 +97,7 @@ static	void	*whiles(t_print *all)
 	return (0);
 }
 
-void	*writeforu(t_print *all, va_list *factor)
+void			*writeforu(t_print *all, va_list *factor)
 {
 	all->wrks = va_arg(*factor, unsigned int);
 	all->str = ft_utoa(all->wrks);

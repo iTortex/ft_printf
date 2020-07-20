@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 13:06:23 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 16:51:36 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:28:43 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	minusnothere(t_print *all, const char *format)
 {
 	if (all->shir != 0)
 		all->shir--;
-	while(all->shir--)
+	while (all->shir--)
 	{
 		write(1, &all->zero, 1);
 		all->exit += 1;
@@ -38,7 +38,7 @@ static void	*minushere(t_print *all, const char *format)
 {
 	if (format[all->i] == '%')
 	{
-		write (1, "%%", 1);
+		write(1, "%%", 1);
 		all->exit++;
 		all->i++;
 		if (all->shir != 0)
@@ -59,11 +59,11 @@ static void	*minushere(t_print *all, const char *format)
 	return (0);
 }
 
-void	*writeforprcnt(t_print *all, const char *format)
+void		*writeforprcnt(t_print *all, const char *format)
 {
 	if (format[all->i] == '%' && all->shir == 0)
 	{
-		write (1, "%%", 1);
+		write(1, "%%", 1);
 		all->exit++;
 		all->i++;
 	}

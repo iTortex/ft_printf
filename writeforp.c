@@ -6,13 +6,13 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:17:49 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 16:51:12 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:27:54 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	*atfirst(t_print *all)
+static void		*atfirst(t_print *all)
 {
 	if (!all->afterdot || all->afterdot < ft_strlen(all->str))
 		all->afterdot = ft_strlen(all->str);
@@ -31,7 +31,7 @@ static void	*atfirst(t_print *all)
 			else if (all->shir >= all->afterdot && all->dot != '.')
 			{
 				write(1, &all->zero, 1);
-				all->exit++; 
+				all->exit++;
 			}
 			all->shir--;
 		}
@@ -39,7 +39,7 @@ static void	*atfirst(t_print *all)
 	return (0);
 }
 
-static void	*minushere(t_print *all)
+static void		*minushere(t_print *all)
 {
 	if (all->checkforminus == 1)
 	{
@@ -49,12 +49,12 @@ static void	*minushere(t_print *all)
 	if (all->afterdot > ft_strlen(all->str) && all->dot == '.')
 	{
 		while (all->afterdot != ft_strlen(all->str))
-			{
-				all->shir--;
-				all->afterdot--;
-				write(1, "0", 1);
-				all->exit++;
-			}
+		{
+			all->shir--;
+			all->afterdot--;
+			write(1, "0", 1);
+			all->exit++;
+		}
 	}
 	write(1, "0x", 2);
 	all->shir -= 2;
@@ -65,7 +65,7 @@ static void	*minushere(t_print *all)
 	return (0);
 }
 
-static void	minusnotherep(t_print *all)
+static void		minusnotherep(t_print *all)
 {
 	if (all->shir < all->afterdot && all->dot == '.')
 	{
@@ -76,11 +76,11 @@ static void	minusnotherep(t_print *all)
 	if (all->afterdot > ft_strlen(all->str) && all->dot == '.')
 	{
 		while (all->afterdot-- != ft_strlen(all->str))
-			{
-				all->shir--;
-				write(1, "0", 1);
-				all->exit++;
-			}
+		{
+			all->shir--;
+			write(1, "0", 1);
+			all->exit++;
+		}
 	}
 	if (all->checkforminus != 1)
 		write(1, "0x", 2);
@@ -93,7 +93,7 @@ static void	minusnotherep(t_print *all)
 	all->i++;
 }
 
-void	*writeforp(t_print *all, va_list *factor)
+void			*writeforp(t_print *all, va_list *factor)
 {
 	all->first = all->afterdot;
 	all->point = va_arg(*factor, long long);

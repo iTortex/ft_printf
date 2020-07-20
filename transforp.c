@@ -6,13 +6,13 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 16:29:26 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 16:31:40 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:11:38 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	void	*zapoln(t_print *all, int ost)
+static void			*zapoln(t_print *all, int ost)
 {
 	int i;
 
@@ -37,12 +37,12 @@ static	void	*zapoln(t_print *all, int ost)
 	return (0);
 }
 
-static	void	*rev(t_print *all)
+static void			*rev(t_print *all)
 {
-	char *dup;
-	int i;
-	int j;
-	
+	char			*dup;
+	int				i;
+	int				j;
+
 	i = 0;
 	j = ft_strlen(all->str);
 	dup = ft_calloc(sizeof(char), j + 1);
@@ -63,11 +63,11 @@ static	void	*rev(t_print *all)
 	return (0);
 }
 
-void	*transforp(t_print *all)
+void				*transforp(t_print *all)
 {
-	int ost;
-	long long int j;
-	
+	int				ost;
+	long long int	j;
+
 	j = all->point;
 	ost = 0;
 	all->six = 87;

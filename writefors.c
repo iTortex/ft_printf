@@ -6,13 +6,13 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 14:06:01 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 17:14:24 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:29:43 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	*minushere(t_print *all)
+static void		*minushere(t_print *all)
 {
 	if (!all->afterdot || all->afterdot < 0)
 		all->afterdot = ft_strlen(all->str);
@@ -33,7 +33,7 @@ static void	*minushere(t_print *all)
 	return (0);
 }
 
-static void *minusnothere(t_print *all)
+static void		*minusnothere(t_print *all)
 {
 	if (!all->afterdot || all->afterdot < 0)
 		all->afterdot = ft_strlen(all->str);
@@ -54,7 +54,7 @@ static void *minusnothere(t_print *all)
 	return (0);
 }
 
-static void	*ifnull(t_print *all)
+static void		*ifnull(t_print *all)
 {
 	all->str = ft_calloc(sizeof(char), 8);
 	all->str = "(null)";
@@ -64,12 +64,12 @@ static void	*ifnull(t_print *all)
 		minushere(all);
 	all->str = NULL;
 	free(all->str);
-	return(0);
+	return (0);
 }
 
-static void	*somecase(t_print *all)
+static void		*somecase(t_print *all)
 {
-	while(all->shir--)
+	while (all->shir--)
 	{
 		all->zero = ' ';
 		write(1, &all->zero, 1);
@@ -79,7 +79,7 @@ static void	*somecase(t_print *all)
 	return (0);
 }
 
-void	*writefors(t_print *all, va_list *factor)
+void			*writefors(t_print *all, va_list *factor)
 {
 	all->str = va_arg(*factor, char *);
 	if (all->dot == '.' && all->afterdot == 0 && all->shir != 0)

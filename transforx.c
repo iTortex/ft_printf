@@ -6,15 +6,15 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 17:16:24 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 17:17:40 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:12:37 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*zapoln(t_print *all, int ost)
+void			*zapoln(t_print *all, int ost)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	all->str = ft_calloc(sizeof(char), ost + 1);
@@ -37,12 +37,12 @@ void	*zapoln(t_print *all, int ost)
 	return (0);
 }
 
-void	*rev(t_print *all)
+void			*rev(t_print *all)
 {
-	char *dup;
-	int i;
-	int j;
-	
+	char		*dup;
+	int			i;
+	int			j;
+
 	i = 0;
 	j = ft_strlen(all->str);
 	dup = ft_calloc(sizeof(char), j + 1);
@@ -63,11 +63,11 @@ void	*rev(t_print *all)
 	return (0);
 }
 
-void	*transforx(t_print *all, const char *format)
+void			*transforx(t_print *all, const char *format)
 {
-	int ost;
-	int j;
-	
+	int			ost;
+	int			j;
+
 	j = all->wrks;
 	ost = 0;
 	if (format[all->i] == 'X')

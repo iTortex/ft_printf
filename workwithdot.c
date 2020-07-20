@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 18:02:43 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 14:50:14 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:21:30 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	*workwithdot(const char *format, t_print *all, va_list *factor)
 {
 	char *pnt;
+
 	pnt = (&((char *)format)[all->i]);
 	all->dot = '.';
 	all->i++;
@@ -27,7 +28,7 @@ void	*workwithdot(const char *format, t_print *all, va_list *factor)
 	{
 		all->star = '*';
 		all->i++;
-		all->afterdot = va_arg(*factor,size_t);
+		all->afterdot = va_arg(*factor, size_t);
 	}
 	return (0);
 }

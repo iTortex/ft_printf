@@ -6,19 +6,19 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:16:10 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 14:48:28 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/20 20:13:19 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	*width(const char *format, t_print *all, va_list *factor)
+void		*width(const char *format, t_print *all, va_list *factor)
 {
-	char *ptr;
-	
+	char	*ptr;
+
 	ptr = (&((char *)format)[all->i]);
 	all->shir = ft_atoi(ptr);
-	while(format[all->i] >= '0' && format[all->i] <= '9')
+	while (format[all->i] >= '0' && format[all->i] <= '9')
 		all->i++;
 	if (format[all->i] == '*')
 	{
