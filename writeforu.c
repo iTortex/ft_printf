@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:51 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 20:30:48 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:52:31 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ static	void	*whiles(t_print *all)
 void			*writeforu(t_print *all, va_list *factor)
 {
 	all->wrks = va_arg(*factor, unsigned int);
-	all->str = ft_utoa(all->wrks);
+	if ((all->str = ft_utoa(all->wrks)) == NULL)
+		all->error = -1;
 	if (all->dot == '.' && (all->afterdot <= 0 || !all->afterdot))
 	{
 		while (all->shir--)

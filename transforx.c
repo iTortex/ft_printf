@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 17:16:24 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 20:12:37 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:48:20 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void			*zapoln(t_print *all, int ost)
 	int			i;
 
 	i = 0;
-	all->str = ft_calloc(sizeof(char), ost + 1);
+	if ((all->str = ft_calloc(sizeof(char), ost + 1)) == NULL)
+		all->error = -1;
 	if (all->wrks == 0)
 		all->str[0] = '0';
 	while (all->wrks > 0)
@@ -45,7 +46,8 @@ void			*rev(t_print *all)
 
 	i = 0;
 	j = ft_strlen(all->str);
-	dup = ft_calloc(sizeof(char), j + 1);
+	if ((dup = ft_calloc(sizeof(char), j + 1)) == NULL)
+		all->error = -1;
 	while (all->str[i])
 	{
 		dup[i] = all->str[i];

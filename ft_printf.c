@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 18:09:19 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 20:02:43 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:45:51 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int				ft_printf(const char *format, ...)
 	{
 		if (format[all.i] == '%')
 		{
-			all.afterdot = 0;
 			all.dot = ' ';
 			all.str = NULL;
 			all.i += 1;
@@ -91,5 +90,7 @@ int				ft_printf(const char *format, ...)
 		}
 	}
 	va_end(factor);
+	if (all.error == -1 && all.exit != 0)
+		all.exit = all.error;
 	return (all.exit);
 }

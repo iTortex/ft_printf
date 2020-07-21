@@ -6,7 +6,7 @@
 /*   By: amarcele <amarcele@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/12 14:06:01 by amarcele          #+#    #+#             */
-/*   Updated: 2020/07/20 20:29:43 by amarcele         ###   ########.fr       */
+/*   Updated: 2020/07/21 18:51:04 by amarcele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void		*minusnothere(t_print *all)
 
 static void		*ifnull(t_print *all)
 {
-	all->str = ft_calloc(sizeof(char), 8);
+	if ((all->str = ft_calloc(sizeof(char), 8)) == NULL)
+		all->error = -1;
 	all->str = "(null)";
 	if (all->minus != '-')
 		minusnothere(all);
@@ -101,5 +102,6 @@ void			*writefors(t_print *all, va_list *factor)
 		minusnothere(all);
 	if (all->minus == '-')
 		minushere(all);
+	all->afterdot = 0;
 	return (0);
 }
